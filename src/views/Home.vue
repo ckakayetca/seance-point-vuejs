@@ -26,7 +26,15 @@ export default {
 
 <style scoped>
     .home {
-        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .home p {
+        font-size: 1.2em;
+        margin: 1em auto;
     }
     .home h1 {
         font-size: 3em;

@@ -1,13 +1,15 @@
 <script setup>
 import Home from './views/Home.vue';
-import CoreHeader from './components/CoreHeader.vue'
-import CoreFooter from './components/CoreFooter.vue'
+import CoreHeader from './components/core/CoreHeader.vue'
+import CoreFooter from './components/core/CoreFooter.vue'
+import NewSeance from './views/seances/NewSeance.vue';
+
 </script>
 
 <template>
   <CoreHeader></CoreHeader>
   <div class="container">
-    <Home></Home>
+    <NewSeance></NewSeance>
   </div>
   <CoreFooter></CoreFooter>
 </template>

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
+/* layout + general styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -21,6 +23,9 @@ body {
   justify-content: center;
 }
 
+
+/* buttons */
+
 .button {
   margin: 1em;
   color: #dfdfdf;
@@ -34,4 +39,44 @@ body {
 .button:hover {
   cursor: pointer;
   background-color: orchid;
+}
+
+/* forms */
+
+fieldset {
+  border: none;
+}
+
+.form-control {
+  padding: 1em;
+  margin: 0.5em;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.form-control input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px darkorchid solid;
+  display: block;
+  width: 100%;
+  padding: 0;
+  font-size: 18px;
+  text-align: center;
+  color: black;
+}
+
+.form-control input:focus{
+    outline: 0;
+    border-bottom-color: lightblue;
+}
+
+.form-control textarea {
+  background-color: rgb(250, 193, 248);
+}
+
+.error {
+  margin: 0;
+  font-size: 1em;
 }
