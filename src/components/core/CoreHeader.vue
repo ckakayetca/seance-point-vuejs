@@ -29,13 +29,13 @@ export default {
 <style scoped>
     header {
         width: 100%;
-        height: 3em;
+        height: 4em;
         background-color: darkorchid;
         display: flex;
         flex-direction: row;
         box-shadow: 0 10px 15px black;
         justify-content: space-between;
-        margin-bottom: 5em;
+        margin-bottom: 3em;
     }
 
     nav {
@@ -55,6 +55,7 @@ export default {
         list-style-type: none;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         gap: 1em;
     }
 </style>

@@ -13,10 +13,12 @@ export default {
 <style scoped>
 
 footer {
+    margin: 0;
     width: 100%;
     height: 3em;
     background-color: darkorchid;
     text-align: center;
+    justify-self: flex-end;
 }
 
 h1 {
