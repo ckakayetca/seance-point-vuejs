@@ -25,7 +25,7 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
     .cards-container {
         margin: 3em 0;
         display: flex;
