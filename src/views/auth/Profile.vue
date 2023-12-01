@@ -37,14 +37,15 @@ export default {
   </div>
 
   <div class="btn-container">
-    <div
+
+    <router-link to="/auth/my-appointments"
       class="button">
       My Appointments
-    </div>
-    <div class="button">
+    </router-link>
+    <router-link to="/auth/my-seances" class="button">
       My Seances
-    </div>
-    <div class="button">Edit Profile</div>
+    </router-link>
+    <router-link to="/auth/profile/edit" class="button">Edit Profile</router-link>
   </div>
 </template>
 

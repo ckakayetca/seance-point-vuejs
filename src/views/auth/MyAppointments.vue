@@ -9,7 +9,7 @@ export default {
 
     <div class="no-apps">
             <h1>You have no appointments!</h1>
-            <a class="button">Go Back</a>
+            <RouterLink to="/auth/profile" class="button">Go Back</RouterLink>
         </div>
 
     <!-- <div class="cards-container">

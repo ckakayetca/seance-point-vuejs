@@ -83,7 +83,7 @@ export default {
 
     <p class="signup">
         Don't have an account?
-        <a href="#" class="button"> Sign Up! </a>
+        <router-link to="/auth/register" class="button"> Sign Up! </router-link>
     </p>
 </template>
 

@@ -121,7 +121,7 @@ export default {
 
     <p class="have-account">
         Already have an account?
-        <a href="#" class="button"> Log In! </a>
+        <router-link to="/auth/login" class="button"> Log In! </router-link>
     </p>
 </template>
 

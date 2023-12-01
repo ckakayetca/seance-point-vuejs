@@ -12,8 +12,8 @@
         <p>You are also able to leave a review to express your satisfaction of the user's service.</p>
 
         <div class="buttons">
-            <a class="button">Sign Up!</a>
-            <a class="button">Check out the published seances</a>
+            <router-link to="/auth/register" class="button">Sign Up!</router-link>
+            <router-link to="/seances" class="button">Check out the published seances</router-link>
         </div>
     </div>
 </template>

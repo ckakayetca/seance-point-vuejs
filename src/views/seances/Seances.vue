@@ -10,7 +10,9 @@ export default {
 
     <div class="cards-container">
         <div class="seance-card">
-            <h3 class="button">Seance Title</h3>
+            <router-link to="/seances/123" class="button h3">
+                Seance Title
+            </router-link>
             <p>Seance Type</p>
             <p>30$ for an appointment</p>
             <p>30 minutes ago</p>
@@ -26,6 +28,10 @@ export default {
 
 
 <style>
+    .h3 {
+        font-weight: bold;
+        font-size: 1.17em
+    }
     .cards-container {
         margin: 3em 0;
         display: flex;

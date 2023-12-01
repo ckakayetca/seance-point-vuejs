@@ -3,17 +3,17 @@
         <!-- Feature directed navigation (home, about, seances) -->
         <nav class="left">
             <ul>
-                <li><a class="button">Home</a></li>
-                <li><a class="button">Seances</a></li>
-                <li><a class="button">New Seance</a></li>
+                <li><router-link to="/" class="button">Home</router-link></li>
+                <li><router-link to="/seances" class="button">Seances</router-link></li>
+                <li><router-link to="/seances/create" class="button">New Seance</router-link></li>
             </ul>
         </nav>
         <!-- Auth-directed navigation (login, register, logout, profile) -->
         <nav class="right">
             <ul>
-                <li><a class="button">Login</a></li>
-                <li><a class="button">Register</a></li>
-                <li><a class="button">My Profile</a></li>
+                <li><router-link to="/auth/login" class="button">Login</router-link></li>
+                <li><router-link to="/auth/register" class="button">Register</router-link></li>
+                <li><router-link to="/auth/profile" class="button">My Profile</router-link></li>
                 <li><a class="button">Logout</a></li>
             </ul>
         </nav>

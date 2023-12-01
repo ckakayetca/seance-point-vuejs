@@ -1,6 +1,8 @@
 <script>
-export default {
+import SeanceReview from './SeanceReview.vue';
 
+export default {
+    components: { SeanceReview }
 }
 </script>
 
@@ -13,8 +15,10 @@ export default {
         </div>
 
         <div class="owner-buttons">
-            <button>Edit</button>
-            <button>Delete</button>
+            <router-link to="/seances/id/edit">
+              <button>Edit</button>
+            </router-link>
+            <button class="button">Delete</button>
         </div>
 
         <div class="description">
@@ -46,6 +50,8 @@ export default {
                     <button>Make an appointment</button>
                 </form>
         </div>
+
+        <SeanceReview></SeanceReview>
     </div>
 </template>
 
