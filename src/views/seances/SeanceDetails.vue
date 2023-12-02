@@ -104,6 +104,7 @@ h1 {
 .description {
   margin: 30px;
   text-align: center;
+  width: 40em;
 }
 
 .details {
@@ -121,6 +122,7 @@ h1 {
 .details-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 h2 {
