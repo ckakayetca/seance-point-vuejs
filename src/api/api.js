@@ -85,7 +85,7 @@ export async function logout() {
     return await axios.get(BASE_URL + `/users/logout`);
 }
 
-// GET /users/profile
+// GET /users/profile -- used to retrieve profile data & authenticate the user
 export async function getProfile(){
     return await axios.get(BASE_URL + `/users/profile`);
 }

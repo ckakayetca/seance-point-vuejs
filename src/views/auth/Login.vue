@@ -2,6 +2,7 @@
 import useVuelidate from '@vuelidate/core';
 import * as vuelidators from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue';
+import { login } from '../../api/api';
 
 const userPassRegex = /^\w+$/;
 function matchesRegex(regex) {
@@ -21,7 +22,7 @@ export default {
         return {
             formData: {
                 username: '',
-                pass: '',
+                password: '',
             }
         }
     },
@@ -34,7 +35,7 @@ export default {
                     matchesRegex: vuelidators.helpers.withMessage('Invalid input!', matchesRegex(userPassRegex)),
                     minLength: vuelidators.minLength(4),
                 },
-                pass: {
+                password: {
                     type: String,
                     required: true,
                     matchesRegex: vuelidators.helpers.withMessage('Invalid input!', matchesRegex(userPassRegex)),
@@ -51,7 +52,9 @@ export default {
                 console.log('Form is invalid! Interrupting submit');
                 return
             }
-            console.log(this.formData);
+
+            await login(this.formData)
+            this.$router.push('/')
         }
     }
 
@@ -73,7 +76,7 @@ export default {
         <fieldset>
             <FormInput field="username" label="Username" required v-model="formData.username" :v$="v$"></FormInput>
 
-            <FormInput field="pass" type="password" label="Password" required v-model="formData.pass" :v$="v$"></FormInput>
+            <FormInput field="password" type="password" label="Password" required v-model="formData.password" :v$="v$"></FormInput>
 
             <div class="form-control">
                 <button class="button">Log In!</button>

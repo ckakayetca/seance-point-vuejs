@@ -8,6 +8,9 @@ import Register from '../views/auth/Register.vue'
 import Profile from '../views/auth/Profile.vue'
 import EditProfile from '../views/auth/EditProfile.vue'
 import MyAppointments from '../views/auth/MyAppointments.vue'
+import { useAuthStore } from "../stores/auth";
+import authentication from "./middlewares/authentication";
+
 
 const routes = [
     { path: '/', component: Home },
@@ -36,5 +39,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
+
+router.beforeEach(authentication);
 
 export default router;
