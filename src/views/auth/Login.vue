@@ -3,6 +3,7 @@ import useVuelidate from '@vuelidate/core';
 import * as vuelidators from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue';
 import { login } from '../../api/api';
+import { useAuthStore } from '../../stores/auth';
 
 const userPassRegex = /^\w+$/;
 function matchesRegex(regex) {
@@ -16,6 +17,7 @@ export default {
     setup() {
         return {
             v$: useVuelidate(),
+            authStore: useAuthStore(),
         }
     },
     data() {
@@ -53,8 +55,10 @@ export default {
                 return
             }
 
-            await login(this.formData)
+            const user = await login(this.formData);
+            this.authStore.setUser(user);
             this.$router.push('/')
+
         }
     }
 
