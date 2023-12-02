@@ -1,29 +1,44 @@
 <script>
-export default {
+import { getAllSeances } from '../../api/api';
+import { dateFromNow } from '../../utils/utils'
 
+export default {
+    async created() {
+        let res = await getAllSeances();
+        console.log(res.data);
+        this.seancesList = res.data;
+        this.isLoading = false;
+    },
+    data() {
+        return {
+            seancesList: [],
+            isLoading: true,
+        }
+    },
+    methods: {
+        dateFromNow
+    }
 }
 </script>
 
 <template>
-    <h1>Seances Page</h1>
-    <!-- <h1>No seances have been posted for now.</h1> -->
+    <template v-if="seancesList.length == 0">
+        <h1>No seances have been posted for now.</h1>
+    </template>
 
-    <div class="cards-container">
-        <div class="seance-card">
-            <router-link to="/seances/123" class="button h3">
-                Seance Title
-            </router-link>
-            <p>Seance Type</p>
-            <p>30$ for an appointment</p>
-            <p>30 minutes ago</p>
+    <template v-else>
+        <h1>Seances Page</h1>
+        <div class="cards-container">
+            <div class="seance-card" v-for="seance in seancesList" :key="seance._id">
+                <router-link :to="`/seances/${seance._id}`" class="button h3">
+                    {{ seance.title }}
+                </router-link>
+                <p>{{seance.type}}</p>
+                <p>{{ seance.price }}$ for an appointment</p>
+                <p>{{  dateFromNow(seance.created_at) }}</p>
+            </div>
         </div>
-        <div class="seance-card">
-            <h3 class="button">Seance Title</h3>
-            <p>Seance Type</p>
-            <p>30$ for an appointment</p>
-            <p>30 minutes ago</p>
-        </div>
-    </div>
+    </template>
 </template>
 
 
@@ -37,21 +52,25 @@ export default {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        gap: 5em;
+        justify-content: space-evenly;
+        gap: 3em;
         font-size: 1.2em;
     }
 
     .seance-card {
-        flex: 1 1 40%;
         display: flex;
         flex-direction: column;
         text-align: center;
+        justify-content: space-between;
         gap: 1em;
         background-color: rgb(179, 61, 238);
-        padding: 2em;
+        border: 4px solid darkorchid;
+        padding: 3em 2em;
         border-radius: 1em;
         color: #dfdfdf;
         box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.4);
+        width: 20em;
+        height: 20em;
     }
 
     .seance-card .button {

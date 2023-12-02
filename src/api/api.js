@@ -1,9 +1,23 @@
-const axios = require('axios').default
+import axios from "axios";
 const BASE_URL = 'http://localhost:3000'
+
+// error handling interceptor
+axios.interceptors.request.use(
+    function(config) {
+        config.withCredentials = true;
+        config.baseURL = BASE_URL;
+
+        return config
+    },
+    function(error) {
+        // implement error handling
+        console.log(error)
+    }
+);
 
 // GET /seances
 export async function getAllSeances() {
-    return await axios.get(BASE_URL + '/seances');
+    return await axios.get('/seances');
 }
 
 // GET /seances/:id

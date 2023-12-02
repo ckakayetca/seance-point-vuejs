@@ -1,17 +1,30 @@
 <script>
 import SeanceReview from './SeanceReview.vue';
+import { getSeance } from '../../api/api';
 
 export default {
-    components: { SeanceReview }
+    components: { SeanceReview },
+    async created() {
+      this.seanceId = this.$route.params.id
+      const result = await getSeance(this.seanceId);
+      this.seance = result.data;
+      console.log(this.seance)
+    },
+    data() {
+      return {
+        seanceId: '',
+        seance: {},
+      }
+    }
 }
 </script>
 
 <template>
     <div class="details-container">
-        <h1>Seance Title</h1>
+        <h1>{{ seance.title }}</h1>
 
         <div class="owner-details">
-            <p>Posted by <span>User on August 13th 2023, 09:05 AM</span></p>
+            <p>Posted by <span>{{ seance.postedBy.username }} on {{ seance.created_at }}</span></p>
         </div>
 
         <div class="owner-buttons">
@@ -22,18 +35,18 @@ export default {
         </div>
 
         <div class="description">
-            <p>This is a description. This is a description. This is a description. This is a description. </p>
+            <p>{{ seance.description }}</p>
         </div>
 
         <div class="details">
             <div class="detail">
-                Type: Seance Type
+                Type: {{ seance.type }}
             </div>
             <div class="detail">
-                Duration: 10 hours
+                Duration: {{seance.duration}} hours
             </div>
             <div class="detail">
-                Price: 13$
+                Price: {{ seance.price }}$
             </div>
         </div>
 
@@ -51,7 +64,7 @@ export default {
                 </form>
         </div>
 
-        <SeanceReview></SeanceReview>
+        <SeanceReview :seance-id="seance._id"></SeanceReview>
     </div>
 </template>
 

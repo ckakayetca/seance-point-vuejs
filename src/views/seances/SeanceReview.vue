@@ -1,6 +1,24 @@
 <script>
-export default {
+import { getReviews } from '../../api/api';
+import { dateFromNow } from '../../utils/utils'
 
+export default {
+    props: {
+        seanceId: String,
+    },
+    async created() {
+        const res = await getReviews(this.seanceId);
+        console.log(res.data)
+        this.reviewsList = res.data
+    },
+    data() {
+        return {
+            reviewsList: [],
+        }
+    },
+    methods: {
+        dateFromNow
+    }
 }
 </script>
 
@@ -9,16 +27,16 @@ export default {
     <div class="reviews-container">
         <div class="reviews-container">
             <h2>Reviews for this seance:</h2>
-            <div class="review-card">
+            <div class="review-card" v-for="review in reviewsList" :key="review._id">
                 <header class="header">
                     <p>
-                        <span>User</span>
+                        <span>{{ review.postedBy.username }}</span>
                         <!-- <span>You</span> -->
-                        rated <span>5 stars, 3 months ago</span>
+                        rated <span>{{ review.rating }} stars, {{ dateFromNow(review.created_at) }}</span>
                     </p>
                 </header>
-                <div class="review-content">
-                    <p>review text</p>
+                <div class="review-content" v-if="review.text">
+                    <p> {{ review.text }}</p>
                 </div>
                 <div class="review-owner-buttons">
                 <button>Edit</button>
