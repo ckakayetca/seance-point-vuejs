@@ -10,7 +10,6 @@ export default {
       this.seanceId = this.$route.params.id
       const result = await getSeance(this.seanceId);
       this.seance = result.data;
-      console.log(this.seance)
       this.isLoading = false;
     },
     data() {

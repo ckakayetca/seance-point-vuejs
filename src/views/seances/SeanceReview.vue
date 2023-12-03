@@ -8,7 +8,6 @@ export default {
     },
     async created() {
         const res = await getReviews(this.seanceId);
-        console.log(res.data)
         this.reviewsList = res.data
     },
     data() {

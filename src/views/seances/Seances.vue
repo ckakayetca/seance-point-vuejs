@@ -5,7 +5,6 @@ import { dateFromNow } from '../../utils/utils'
 export default {
     async created() {
         let res = await getAllSeances();
-        console.log(res.data);
         this.seancesList = res.data;
         this.isLoading = false;
     },

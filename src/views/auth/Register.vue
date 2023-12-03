@@ -69,10 +69,8 @@ export default {
             const res = await this.v$.$validate();
 
             if(!res) {
-                console.log('Form is invalid! Interrupting submit');
                 return
             }
-            console.log(this.formData);
         }
     }
 

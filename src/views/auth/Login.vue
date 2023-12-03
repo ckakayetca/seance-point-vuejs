@@ -51,12 +51,11 @@ export default {
             const res = await this.v$.$validate();
 
             if(!res) {
-                console.log('Form is invalid! Interrupting submit');
                 return
             }
 
             const user = await login(this.formData);
-            this.authStore.setUser(user);
+            this.authStore.setUser(user.data);
             this.$router.push('/')
 
         }

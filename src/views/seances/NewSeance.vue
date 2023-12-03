@@ -39,7 +39,6 @@ export default {
     methods: {
         async onSubmit() {
             const res = await this.v$.$validate();
-            console.log(res ? 'valid' : 'invalid');
         },
         resetForm() {
             this.formData = { ...this.initialState };

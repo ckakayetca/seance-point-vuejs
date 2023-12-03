@@ -14,11 +14,9 @@ export default {
     let res = await getProfile();
 
     const user = res.data;
-    console.log(user)
     this.authStore.setUser(user)
   },
   async beforeUpdate() {
-    console.log('asd')
   }
 }
 </script>

@@ -11,24 +11,23 @@ export default {
   components: { AppLoader },
   data() {
     return {
-      user: {},
+      user: this.authStore.user,
       hasAppointments: false,
       hasSeances: false,
       isLoading: true,
     }
   },
   created() {
-    console.log(this.authStore.user);
-    this.user = this.authStore.user;
-
-    this.isLoading = false;
-    if(this.user.seances.length > 0) {
+    if(this.authStore.user.seances) {
       this.hasSeances = true;
+      this.isLoading = false;
     }
 
-    if(this.user.appointments.length > 0) {
+    if(this.authStore.user.appointments) {
       this.hasAppointments = true;
     }
+  },
+  mounted() {
   },
   methods: {
     dateFromNow,

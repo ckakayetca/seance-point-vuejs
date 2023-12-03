@@ -11,3 +11,16 @@ export function dateFromNow(date) {
 export function fullDate(date) {
     return moment(date).format('MMMM Do YYYY, hh:mm A');
 }
+
+// empty user object
+
+export let emptyUser = {
+    username: '',
+    email: '',
+    tel: '',
+    created_at: '',
+    reviews: [],
+    appointments: [],
+    seances: [],
+    _id: '',
+}

@@ -5,7 +5,6 @@ function hasAuthCookie() {
     return document.cookie.includes('auth');
 }
 export default async function authentication(to, from, next) {
-    console.log('auth')
 
     const authStore = useAuthStore()
     if(!hasAuthCookie()) {

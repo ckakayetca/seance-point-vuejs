@@ -1,10 +1,22 @@
 <script>
+import { logout } from '../../api/api';
 import { useAuthStore } from '../../stores/auth';
 import { mapState } from 'pinia';
+
 
 export default {
     computed: {
         ...mapState(useAuthStore, ["isLoggedIn"])
+    },
+    methods: {
+        async onLogout() {
+            let res = await logout();
+            if(this.$route.path === "/") {
+                this.$router.go();
+            } else {
+                this.$router.push('/')
+            }
+        }
     }
 }
 </script>
@@ -28,7 +40,7 @@ export default {
                 </template>
                 <template v-else>
                     <li><router-link to="/auth/profile" class="button">My Profile</router-link></li>
-                    <li><a class="button">Logout</a></li>
+                    <li><a class="button" @click="onLogout">Logout</a></li>
                 </template>
             </ul>
         </nav>
