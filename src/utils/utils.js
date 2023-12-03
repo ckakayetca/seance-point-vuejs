@@ -5,5 +5,9 @@ import moment from "moment/moment";
 // https://momentjs.com/
 
 export function dateFromNow(date) {
-    return moment(date).fromNow()
+    return moment(date).fromNow();
+}
+
+export function fullDate(date) {
+    return moment(date).format('MMMM Do YYYY, hh:mm A');
 }
