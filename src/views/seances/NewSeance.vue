@@ -3,6 +3,8 @@
 import { useVuelidate } from '@vuelidate/core'
 import { minValue, minLength, required } from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue'
+import { createSeance } from '../../api/api'
+
 export default {
     components: { FormInput },
     setup() {
@@ -39,6 +41,12 @@ export default {
     methods: {
         async onSubmit() {
             const res = await this.v$.$validate();
+            if(!res) {
+                return
+            }
+
+            const response = await createSeance(this.formData)
+            this.$router.push('/seances')
         },
         resetForm() {
             this.formData = { ...this.initialState };
@@ -50,7 +58,7 @@ export default {
 <template>
     <div class="seance">
 
-        <h1>Start your carreer by posting a seance offer!</h1>
+        <h1>Start your career by posting a seance offer!</h1>
         <form class="seance" @submit.prevent="onSubmit">
 
             <FormInput field="title" label="Title" required v-model="formData.title" :v$="v$"></FormInput>

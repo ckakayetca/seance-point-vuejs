@@ -2,6 +2,8 @@
 import useVuelidate from '@vuelidate/core';
 import * as vuelidators from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue';
+import { useAuthStore } from '../../stores/auth';
+import { register } from '../../api/api';
 
 const emailRegex = /^\w+@abv.bg$/;
 const userPassRegex = /^\w+$/;
@@ -18,6 +20,7 @@ export default {
     setup() {
         return {
             v$: useVuelidate(),
+            authStore: useAuthStore(),
         }
     },
     data() {
@@ -25,8 +28,8 @@ export default {
             formData: {
                 email: '',
                 username: '',
-                pass: '',
-                rePass: '',
+                password: '',
+                rePassword: '',
                 tel: '',
             }
         }
@@ -45,16 +48,16 @@ export default {
                     matchesRegex: vuelidators.helpers.withMessage('Invalid input!', matchesRegex(userPassRegex)),
                     minLength: vuelidators.minLength(4),
                 },
-                pass: {
+                password: {
                     type: String,
                     required: true,
                     matchesRegex: vuelidators.helpers.withMessage('Invalid input!', matchesRegex(userPassRegex)),
                     minLength: vuelidators.minLength(5),
                 },
-                rePass: {
+                rePassword: {
                     type: String,
                     required: true,
-                    matchesPass: vuelidators.helpers.withMessage('The passwords don\'t match!', vuelidators.sameAs(this.formData.pass)),
+                    matchesPass: vuelidators.helpers.withMessage('The passwords don\'t match!', vuelidators.sameAs(this.formData.password)),
                 },
                 tel: {
                     type: String,
@@ -67,9 +70,14 @@ export default {
     methods: {
         async onSubmit() {
             const res = await this.v$.$validate();
-
             if(!res) {
                 return
+            }
+
+            const response = await register(this.formData);
+
+            if(response.status == 200) {
+                this.$router.push('/auth/login')
             }
         }
     }
@@ -105,9 +113,9 @@ export default {
 
             <FormInput field="username" label="Username" required v-model="formData.username" :v$="v$"></FormInput>
 
-            <FormInput field="pass" type="password" label="Password" required v-model="formData.pass" :v$="v$"></FormInput>
+            <FormInput field="password" type="password" label="Password" required v-model="formData.password" :v$="v$"></FormInput>
 
-            <FormInput field="rePass" type="password" label="Confirm Password" required v-model="formData.rePass" :v$="v$"></FormInput>
+            <FormInput field="rePassword" type="password" label="Confirm Password" required v-model="formData.rePassword" :v$="v$"></FormInput>
 
             <FormInput field="tel" label="Phone number" required v-model="formData.tel" :v$="v$"></FormInput>
 

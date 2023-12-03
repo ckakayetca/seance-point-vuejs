@@ -1,8 +1,10 @@
 <script>
 import { getAllSeances } from '../../api/api';
+import AppLoader from '../../components/shared/AppLoader.vue';
 import { dateFromNow } from '../../utils/utils'
 
 export default {
+    components: { AppLoader },
     async created() {
         let res = await getAllSeances();
         this.seancesList = res.data;
@@ -21,7 +23,10 @@ export default {
 </script>
 
 <template>
-    <template v-if="seancesList.length == 0">
+    <template v-if="isLoading">
+        <AppLoader></AppLoader>
+    </template>
+    <template v-else-if="seancesList.length == 0">
         <h1>No seances have been posted for now.</h1>
     </template>
 

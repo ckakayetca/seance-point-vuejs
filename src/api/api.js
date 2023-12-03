@@ -32,7 +32,7 @@ export async function getReviews(id) {
 
 // POST /seances
 export async function createSeance(data) {
-    return await axios.post(BASE_URL + '/seances', data);
+    return await axios.post(BASE_URL + '/seances/create', data);
 }
 
 // GET /seances/my-seances

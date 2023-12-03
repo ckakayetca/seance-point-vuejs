@@ -1,22 +1,49 @@
 <script>
 import { getReviews } from '../../api/api';
 import { dateFromNow } from '../../utils/utils'
+import { useAuthStore } from '../../stores/auth';
+import AppLoader from '../../components/shared/AppLoader.vue';
 
 export default {
+    components: { AppLoader },
+    setup() {
+        return {
+            authStore: useAuthStore(),
+        }
+    },
     props: {
         seanceId: String,
+        isOwner: Boolean,
     },
     async created() {
         const res = await getReviews(this.seanceId);
         this.reviewsList = res.data
+
+        if(this.reviewsList.length > 0) {
+            this.noReviews = false;
+        }
     },
     data() {
         return {
             reviewsList: [],
+            showReviewForm: false,
+            noReviews: true,
+            editMode: false,
+            userAlreadyReviewed: false,
+            isLoading: true,
         }
     },
     methods: {
-        dateFromNow
+        dateFromNow,
+        checkOwner(review) {
+            if(review.postedBy._id == this.authStore.user._id) {
+                return true;
+            }
+            return false;
+        },
+        toggleReview() {
+            this.showReviewForm = !this.showReviewForm;
+        }
     }
 }
 </script>
@@ -24,7 +51,7 @@ export default {
 <template>
     <!-- reviews -->
     <div class="reviews-container">
-        <div class="reviews-container">
+        <div class="reviews-container" v-if="!noReviews">
             <h2>Reviews for this seance:</h2>
             <div class="review-card" v-for="review in reviewsList" :key="review._id">
                 <header class="header">
@@ -43,18 +70,17 @@ export default {
                 </div>
             </div>
         </div>
-        <!-- <div class="reviews-container" *ngIf="noReviews">
+        <div class="reviews-container" v-else>
                 <h2>There are no reviews for this seance</h2>
-            </div> -->
+        </div>
 
 
         <!-- toggle review form if user hasnt reviewed yet-->
-            <h2 class="button"> Leave a review!</h2>
-            <!-- <h2 class="button">Hide</h2> -->
+            <h2 class="button" v-if="!showReviewForm && !isOwner" @click="toggleReview"> Leave a review!</h2>
 
         <!-- review form -->
-        <div class="leave-review">
-            <h2 class="button">Hide</h2>
+        <div class="leave-review" v-else-if="!isOwner">
+            <h2 class="button" @click="toggleReview">Hide</h2>
             <form class="review">
                 <div class="form-control">
                     <label for="rating">Rating</label>
@@ -115,6 +141,7 @@ export default {
     align-items: center;
     justify-content: center;
     margin: 20px auto;
+    border: 2px solid darkorchid;
 }
 
 .review input {
