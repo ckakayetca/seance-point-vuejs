@@ -67,7 +67,7 @@ export async function editReview(seanceId, reviewId, data) {
 
 // DELETE /seances/:id/reviews/:reviewId
 export async function deleteReview(seanceId, reviewId) {
-    return await axios.delete(BASE_URL + `/seances/${id}/reviews/${reviewId}`);
+    return await axios.delete(BASE_URL + `/seances/${seanceId}/reviews/${reviewId}`);
 }
 
 // POST /users/login

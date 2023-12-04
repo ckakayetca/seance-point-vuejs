@@ -89,7 +89,20 @@ export default {
 
             this.$router.go()
         },
-        async onReviewDelete() { },
+        async onReviewDelete() {
+            let reviewId = '';
+
+            for(let r of this.reviewsList) {
+                if(r.postedBy._id === this.authStore.user._id) {
+                    reviewId = r._id;
+                    break;
+                }
+            }
+
+            let res = await deleteReview(this.seanceId, reviewId);
+
+            this.$router.go();
+         },
 
     },
     validations() {
@@ -126,7 +139,7 @@ export default {
                     </div>
                     <div class="review-owner-buttons" v-if="checkOwner(review)">
                         <button @click="toggleEditMode">Edit</button>
-                        <button>Delete</button>
+                        <button @click="onReviewDelete">Delete</button>
                     </div>
                 </div>
             </div>
