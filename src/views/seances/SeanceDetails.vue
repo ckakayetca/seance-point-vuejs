@@ -1,6 +1,6 @@
 <script>
 import SeanceReview from './SeanceReview.vue';
-import { getSeance } from '../../api/api';
+import { deleteSeance, getSeance } from '../../api/api';
 import { fullDate } from '../../utils/utils';
 import AppLoader from '../../components/shared/AppLoader.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
@@ -59,6 +59,11 @@ export default {
       console.log(res.data)
 
       this.$router.push('/auth/my-appointments')
+    },
+    async onDelete() {
+      let res = await deleteSeance(this.seanceId);
+
+      this.$router.push('/seances')
     }
   },
   validations() {
@@ -88,7 +93,7 @@ export default {
         <router-link to="/seances/id/edit">
           <button>Edit</button>
         </router-link>
-        <button class="button">Delete</button>
+        <button class="button" @click="onDelete">Delete</button>
       </div>
 
       <div class="description">
