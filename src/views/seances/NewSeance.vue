@@ -64,8 +64,9 @@ export default {
                 const response = await editSeance(this.seanceId, this.formData)
             } else {
                 const response = await createSeance(this.formData)
+                this.seanceId = response.data._id
             }
-            this.$router.push('/seances')
+            this.$router.push(`/seances/${this.seanceId}`)
         },
         resetForm() {
             this.formData = { ...this.initialState };
