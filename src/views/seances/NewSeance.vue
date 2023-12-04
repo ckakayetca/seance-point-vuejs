@@ -3,9 +3,12 @@
 import { useVuelidate } from '@vuelidate/core'
 import { minValue, minLength, required } from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue'
-import { createSeance } from '../../api/api'
+import { createSeance, getSeance, editSeance } from '../../api/api'
 
 export default {
+    props: {
+        editMode: Boolean,
+    },
     components: { FormInput },
     setup() {
         return {
@@ -14,6 +17,7 @@ export default {
     },
     data() {
         return {
+            seanceId: '',
             formData: {
                 title: '',
                 type: '',
@@ -35,6 +39,17 @@ export default {
             }
         }
     },
+    async created() {
+        if(this.editMode) {
+            this.seanceId = this.$route.params.id
+        }
+
+        let res = await getSeance(this.seanceId);
+
+        let {title, type, price, duration, description } = res.data;
+
+        this.formData = {title, type, price, duration, description}
+    },
     mounted() {
         this.initialState = { ...this.formData };
     },
@@ -45,7 +60,11 @@ export default {
                 return
             }
 
-            const response = await createSeance(this.formData)
+            if(this.editMode) {
+                const response = await editSeance(this.seanceId, this.formData)
+            } else {
+                const response = await createSeance(this.formData)
+            }
             this.$router.push('/seances')
         },
         resetForm() {
@@ -58,7 +77,9 @@ export default {
 <template>
     <div class="seance">
 
-        <h1>Start your career by posting a seance offer!</h1>
+        <h1 v-if="!editMode">Start your career by posting a seance offer!</h1>
+        <h1 v-else>Edit Page</h1>
+
         <form class="seance" @submit.prevent="onSubmit">
 
             <FormInput field="title" label="Title" required v-model="formData.title" :v$="v$"></FormInput>

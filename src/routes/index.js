@@ -18,7 +18,7 @@ const routes = [
         path: '/seances', children: [
             { path: '', component: Seances },
             { path: ':id', component: SeanceDetails },
-            { path: ':id/edit', component: NewSeance },
+            { path: ':id/edit', component: NewSeance, props: { editMode: true } },
             { path: 'create', component: NewSeance }
         ]
     },

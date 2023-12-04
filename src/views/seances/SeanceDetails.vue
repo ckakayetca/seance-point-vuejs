@@ -90,7 +90,7 @@ export default {
       </div>
 
       <div class="owner-buttons" v-if="isOwner">
-        <router-link to="/seances/id/edit">
+        <router-link :to="`/seances/${seanceId}/edit`">
           <button>Edit</button>
         </router-link>
         <button class="button" @click="onDelete">Delete</button>
