@@ -91,8 +91,8 @@ export async function getProfile(){
 }
 
 // PUT /users/profile
-export async function editProfile(){
-    return await axios.put(BASE_URL + `/users/profile`);
+export async function editProfile(data){
+    return await axios.put(BASE_URL + `/users/profile`, data);
 }
 
 // GET /my-appointments

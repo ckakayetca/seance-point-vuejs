@@ -2,6 +2,7 @@
 import useVuelidate from '@vuelidate/core';
 import * as vuelidators from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue';
+import { editProfile } from '../../api/api';
 
 const emailRegex = /^\w+@abv.bg$/;
 const userPassRegex = /^\w+$/;
@@ -56,8 +57,13 @@ export default {
             const res = await this.v$.$validate();
 
             if(!res) {
+                console.log('invalid inputs')
                 return
             }
+
+            let response = await editProfile(this.formData);
+            console.log(response.data);
+            this.$router.push('/auth/profile')
         }
     }
 
