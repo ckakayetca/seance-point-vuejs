@@ -29,7 +29,7 @@ const routes = [
             { path: 'register', component: Register },
             { path: 'profile', component: Profile },
             { path: 'profile/edit', component: EditProfile },
-            { path: 'my-seances', component: Seances },
+            { path: 'my-seances', component: Seances, props: { mySeances: true } },
             { path: 'my-appointments', component: MyAppointments },
         ]
     }

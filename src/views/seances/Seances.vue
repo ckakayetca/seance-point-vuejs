@@ -1,11 +1,19 @@
 <script>
-import { getAllSeances } from '../../api/api';
+import { getAllSeances, getMySeances } from '../../api/api';
 import { dateFromNow } from '../../utils/utils'
 
 export default {
+    props: {
+        mySeances: Boolean,
+    },
     async created() {
-        let res = await getAllSeances();
-        this.seancesList = res.data;
+        if(this.mySeances) {
+            let res = await getMySeances();
+            this.seancesList = res.data
+        } else {
+            let res = await getAllSeances();
+            this.seancesList = res.data
+        }
         this.isLoading = false;
     },
     data() {
@@ -29,7 +37,8 @@ export default {
     </template>
 
     <template v-else>
-        <h1>Seances Page</h1>
+        <h1 v-if="!mySeances">Seances Page</h1>
+        <h1 v-else>My Seances</h1>
         <div class="cards-container">
             <div class="seance-card" v-for="seance in seancesList" :key="seance._id">
                 <router-link :to="`/seances/${seance._id}`" class="button h3">
