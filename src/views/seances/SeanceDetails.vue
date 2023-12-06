@@ -7,6 +7,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { appoint } from '../../api/api';
 import { useVuelidate } from '@vuelidate/core'
+import { required } from '@vuelidate/validators'
 import { useAuthStore } from '../../stores/auth';
 
 export default {
@@ -49,9 +50,10 @@ export default {
   methods: {
     fullDate,
     async onAppoint() {
-      let val = await this.v$.$validate();
+      let invalid = this.v$.date.$invalid
 
-      if(!val) {
+      if(invalid) {
+        console.log('no!')
         return
       }
 
@@ -69,7 +71,7 @@ export default {
   validations() {
     return {
       date: {
-        required: true,
+        required,
       }
     }
   }
@@ -123,7 +125,7 @@ export default {
           <form class="appointment" @submit.prevent="onAppoint">
             <div class="form-control">
               <label for="date">Date</label>
-              <VueDatePicker v-model="date" :disabled-dates="takenDatesList"></VueDatePicker>
+              <VueDatePicker v-model="date" :disabled-dates="takenDatesList" @blur="v$.date.$touch"></VueDatePicker>
             </div>
             <button>Make an appointment</button>
           </form>
