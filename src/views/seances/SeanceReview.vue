@@ -2,13 +2,12 @@
 import { getReviews } from '../../api/api';
 import { dateFromNow } from '../../utils/utils'
 import { useAuthStore } from '../../stores/auth';
-import AppLoader from '../../components/shared/AppLoader.vue';
 import FormInput from '../../components/shared/FormInput.vue';
 import { useVuelidate } from '@vuelidate/core'
 import { minValue, maxValue, maxLength } from '@vuelidate/validators'
 import { postReview, editReview, deleteReview } from '../../api/api';
 export default {
-    components: { AppLoader, FormInput },
+    components: { FormInput },
     setup() {
         return {
             authStore: useAuthStore(),

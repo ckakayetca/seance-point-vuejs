@@ -1,7 +1,6 @@
 <script>
 import { useAuthStore } from '../../stores/auth';
 import { dateFromNow } from '../../utils/utils';
-import AppLoader from '../../components/shared/AppLoader.vue'
 import { getProfile } from '../../api/api';
 
 
@@ -11,7 +10,6 @@ export default {
       authStore: useAuthStore(),
     }
   },
-  components: { AppLoader },
   data() {
     return {
       user: {},

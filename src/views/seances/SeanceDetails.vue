@@ -2,7 +2,6 @@
 import SeanceReview from './SeanceReview.vue';
 import { deleteSeance, getSeance } from '../../api/api';
 import { fullDate } from '../../utils/utils';
-import AppLoader from '../../components/shared/AppLoader.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { appoint } from '../../api/api';
@@ -17,7 +16,7 @@ export default {
       authStore: useAuthStore(),
     }
   },
-  components: { SeanceReview, AppLoader, VueDatePicker },
+  components: { SeanceReview, VueDatePicker },
   async created() {
     this.seanceId = this.$route.params.id
     const res = await getSeance(this.seanceId);

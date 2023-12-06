@@ -1,10 +1,8 @@
 <script>
 import { getAllSeances } from '../../api/api';
-import AppLoader from '../../components/shared/AppLoader.vue';
 import { dateFromNow } from '../../utils/utils'
 
 export default {
-    components: { AppLoader },
     async created() {
         let res = await getAllSeances();
         this.seancesList = res.data;
