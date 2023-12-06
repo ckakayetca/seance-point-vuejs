@@ -113,7 +113,7 @@ export default {
         </div>
       </div>
 
-      <div class="appointment-con">
+      <div class="appointment-con" v-if="authStore.isLoggedIn">
         <template v-if="hasAppointment">
           <h2>You have an appointment for this seance! Have fun :)</h2>
         </template>

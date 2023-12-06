@@ -1,19 +1,31 @@
 import axios from "axios";
+import router from "../routes";
+import { useErrorStore } from "../stores/error";
 const BASE_URL = 'http://localhost:3000'
 
-// error handling interceptor
+// config
 axios.interceptors.request.use(
-    function(config) {
+    function (config) {
         config.withCredentials = true;
         config.baseURL = BASE_URL;
 
         return config
     },
-    function(error) {
-        // implement error handling
-        console.log(error)
-    }
+    function (error) { }
 );
+
+// error handling
+axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        const errorStore = useErrorStore();
+
+        let message = error.response.data.message;
+        errorStore.setError(message);
+
+        router.push({ name: 'error' })
+        return Promise.reject(error)
+    })
 
 // GET /seances
 export async function getAllSeances() {
@@ -86,17 +98,17 @@ export async function logout() {
 }
 
 // GET /users/profile -- used to retrieve profile data & authenticate the user
-export async function getProfile(){
+export async function getProfile() {
     return await axios.get(BASE_URL + `/users/profile`);
 }
 
 // PUT /users/profile
-export async function editProfile(data){
+export async function editProfile(data) {
     return await axios.put(BASE_URL + `/users/profile`, data);
 }
 
 // GET /my-appointments
-export async function getAppointments(){
+export async function getAppointments() {
     return await axios.get(BASE_URL + `/my-appointments`);
 }
 

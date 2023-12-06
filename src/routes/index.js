@@ -8,8 +8,10 @@ import Register from '../views/auth/Register.vue'
 import Profile from '../views/auth/Profile.vue'
 import EditProfile from '../views/auth/EditProfile.vue'
 import MyAppointments from '../views/auth/MyAppointments.vue'
+import Error from '../components/core/Error.vue'
 import { useAuthStore } from "../stores/auth";
-import authentication from "./middlewares/authentication";
+import authentication from "./middlewares/authentication.js";
+import auth from './middlewares/authorization.js'
 
 
 const routes = [
@@ -18,21 +20,22 @@ const routes = [
         path: '/seances', children: [
             { path: '', component: Seances },
             { path: ':id', component: SeanceDetails },
-            { path: ':id/edit', component: NewSeance, props: { editMode: true } },
-            { path: 'create', component: NewSeance }
+            { path: ':id/edit', component: NewSeance, props: { editMode: true }, beforeEnter: auth},
+            { path: 'create', component: NewSeance, beforeEnter: auth }
         ]
     },
     {
         path: '/auth',
         children: [
-            { path: 'login', component: Login },
-            { path: 'register', component: Register },
-            { path: 'profile', component: Profile },
-            { path: 'profile/edit', component: EditProfile },
-            { path: 'my-seances', component: Seances, props: { mySeances: true } },
-            { path: 'my-appointments', component: MyAppointments },
+            { path: 'login', name: 'login', component: Login, beforeEnter: auth },
+            { path: 'register', component: Register, beforeEnter: auth },
+            { path: 'profile', component: Profile, beforeEnter: auth },
+            { path: 'profile/edit', component: EditProfile, beforeEnter: auth },
+            { path: 'my-seances', component: Seances, props: { mySeances: true }, beforeEnter: auth },
+            { path: 'my-appointments', component: MyAppointments, beforeEnter: auth },
         ]
-    }
+    },
+    { path: '/error', name: 'error', component: Error, props: true}
 ]
 
 const router = createRouter({
