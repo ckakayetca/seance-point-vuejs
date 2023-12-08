@@ -81,8 +81,6 @@ export default {
                         break;
                     }
                 }
-                console.log(this.seanceId);
-                console.log(this.formData)
                 let res = await editReview(this.seanceId, reviewId, this.formData)
             }
 

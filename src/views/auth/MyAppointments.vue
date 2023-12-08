@@ -17,9 +17,7 @@ export default {
     },
     async created() {
         let res = await getAppointments();
-        console.log(res.data)
         this.appsList = res.data;
-
         if (this.appsList.length == 0) {
             this.noApps = true;
         }
@@ -55,15 +53,15 @@ export default {
             <div class="cards-container">
                 <div class="seance-card" v-for="app in appsList" :key="app._id">
                     <h3>
-                        <a class="title"><span>{{ app.seanceId.title }}</span></a>
+                        <a class="title"><span>{{ app.seanceId?.title }}</span></a>
                     </h3>
-                    <p>Type: {{ app.seanceId.type }}</p>
+                    <p>Type: {{ app.seanceId?.type }}</p>
                     <p>Price: 50$</p>
                     <p>{{ fullDate(app.date) }}</p>
 
                     <div class="btn-container">
                         <button class="button" @click="onAppCancel(app._id)">Cancel Appointment</button>
-                        <router-link :to="`/seances/${app.seanceId._id}`" class="button">
+                        <router-link :to="`/seances/${app.seanceId?._id}`" class="button">
                             Go to Seance
                         </router-link>
                     </div>

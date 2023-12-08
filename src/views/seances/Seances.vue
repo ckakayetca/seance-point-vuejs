@@ -1,8 +1,15 @@
 <script>
 import { getAllSeances, getMySeances } from '../../api/api';
 import { dateFromNow } from '../../utils/utils'
+import { useAuthStore } from '../../stores/auth';
+import { mapState } from 'pinia';
 
 export default {
+    setup() {
+        return {
+            authStore: useAuthStore(),
+        }
+    },
     props: {
         mySeances: Boolean,
     },
@@ -24,6 +31,9 @@ export default {
     },
     methods: {
         dateFromNow
+    },
+    computed: {
+        ...mapState(useAuthStore, ["isLoggedIn"])
     }
 }
 </script>
@@ -35,7 +45,8 @@ export default {
     <template v-else-if="seancesList.length == 0">
         <h1 v-if="!mySeances">No seances have been posted for now.</h1>
         <h1 v-else>You haven't posted any seances yet</h1>
-        <router-link to="/">Go Back</router-link>
+        <router-link to="/" class="button">Go Back</router-link>
+        <router-link to="/seances/create" class="button">Post a Seance</router-link>
     </template>
 
     <template v-else>

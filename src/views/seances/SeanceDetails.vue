@@ -52,12 +52,10 @@ export default {
       let invalid = this.v$.date.$invalid
 
       if(invalid) {
-        console.log('no!')
         return
       }
 
       let res = await appoint(this.seanceId, { date: this.date });
-      console.log(res.data)
 
       this.$router.push('/auth/my-appointments')
     },
