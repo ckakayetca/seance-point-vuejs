@@ -97,3 +97,21 @@ fieldset {
   margin: 0;
   font-size: 1em;
 }
+
+/* responsiveness */
+
+@media (max-width: 1368px) {
+  #app {
+    font-size: 14px;
+  }
+}
+@media (max-width: 900px) {
+  #app {
+    font-size: 12px;
+  }
+}
+@media (max-width: 482px) {
+  #app {
+    font-size: 10px;
+  }
+}
