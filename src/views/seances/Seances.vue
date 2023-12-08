@@ -33,7 +33,9 @@ export default {
         <AppLoader></AppLoader>
     </template>
     <template v-else-if="seancesList.length == 0">
-        <h1>No seances have been posted for now.</h1>
+        <h1 v-if="!mySeances">No seances have been posted for now.</h1>
+        <h1 v-else>You haven't posted any seances yet</h1>
+        <router-link to="/">Go Back</router-link>
     </template>
 
     <template v-else>

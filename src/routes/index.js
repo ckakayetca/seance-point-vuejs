@@ -9,7 +9,7 @@ import Profile from '../views/auth/Profile.vue'
 import EditProfile from '../views/auth/EditProfile.vue'
 import MyAppointments from '../views/auth/MyAppointments.vue'
 import Error from '../components/core/Error.vue'
-import { useAuthStore } from "../stores/auth";
+import NotFound from '../views/NotFound.vue'
 import authentication from "./middlewares/authentication.js";
 import auth from './middlewares/authorization.js'
 
@@ -35,7 +35,8 @@ const routes = [
             { path: 'my-appointments', component: MyAppointments, beforeEnter: auth },
         ]
     },
-    { path: '/error', name: 'error', component: Error, props: true}
+    { path: '/error', name: 'error', component: Error, props: true},
+    { path: '/:pathMatch(.*)*', component: NotFound}
 ]
 
 const router = createRouter({
