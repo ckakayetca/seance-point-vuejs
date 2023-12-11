@@ -19,8 +19,13 @@ axios.interceptors.response.use(
     (response) => response,
     async (error) => {
         const errorStore = useErrorStore();
+        let message = ''
 
-        let message = error.response.data.message;
+        try {
+            message = error.response.data.message;
+        } catch (e) {
+            message = error.message;
+        }
         errorStore.setError(message);
 
         router.push({ name: 'error' })
