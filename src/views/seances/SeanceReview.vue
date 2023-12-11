@@ -43,7 +43,7 @@ export default {
             userAlreadyReviewed: false,
             isLoading: true,
             formData: {
-                rating: 0,
+                rating: 1,
                 text: '',
             }
         }
