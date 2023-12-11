@@ -2,7 +2,7 @@
 import useVuelidate from '@vuelidate/core';
 import * as vuelidators from '@vuelidate/validators'
 import FormInput from '../../components/shared/FormInput.vue';
-import { editProfile } from '../../api/api';
+import { editProfile, getProfile } from '../../api/api';
 
 const emailRegex = /^\w+@abv.bg$/;
 const userPassRegex = /^\w+$/;
@@ -29,6 +29,14 @@ export default {
                 tel: '',
             }
         }
+    },
+    async created() {
+        let res = await getProfile();
+
+        let {email, username, tel} = res.data;
+
+        this.formData = {email, username, tel};
+
     },
     validations() {
         return {
