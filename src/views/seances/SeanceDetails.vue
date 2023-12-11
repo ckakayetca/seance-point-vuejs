@@ -122,7 +122,7 @@ export default {
           <form class="appointment" @submit.prevent="onAppoint">
             <div class="form-control">
               <label for="date">Date</label>
-              <VueDatePicker v-model="date" :disabled-dates="takenDatesList" @blur="v$.date.$touch"></VueDatePicker>
+              <VueDatePicker v-model="date" :disabled-dates="takenDatesList" :min-date="new Date()" @blur="v$.date.$touch"></VueDatePicker>
             </div>
             <button>Make an appointment</button>
           </form>
