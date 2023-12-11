@@ -42,3 +42,8 @@ I would like to apologise for the rough user interface of the application. Altho
 # Used libraries
 
 This application uses Moment.js and Vue Datepicker as additional libraries.
+
+# Warning
+
+The application will NOT work without the Node.js server running.
+https://github.com/ckakayetca/SeancePoint-RestApi
