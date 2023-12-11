@@ -42,13 +42,13 @@ export default {
     async created() {
         if(this.editMode) {
             this.seanceId = this.$route.params.id
+            let res = await getSeance(this.seanceId);
+
+            let {title, type, price, duration, description } = res.data;
+
+            this.formData = {title, type, price, duration, description}
         }
 
-        let res = await getSeance(this.seanceId);
-
-        let {title, type, price, duration, description } = res.data;
-
-        this.formData = {title, type, price, duration, description}
     },
     mounted() {
         this.initialState = { ...this.formData };
